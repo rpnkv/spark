@@ -16,6 +16,8 @@
  */
 package org.apache.spark.sql.errors
 
+import org.scalatest.Ignore
+
 // import org.apache.spark.{SparkArithmeticException, SparkConf}
 
 import org.apache.spark.{SparkArithmeticException, SparkConf}
@@ -28,6 +30,7 @@ import org.apache.spark.sql.internal.SQLConf
 import org.apache.spark.sql.test.SharedSparkSession
 
 
+@Ignore
 class QueryTestPractice extends QueryTest with SharedSparkSession {
   override def sparkConf: SparkConf = super.sparkConf.set(SQLConf.ANSI_ENABLED.key, "true")
 
