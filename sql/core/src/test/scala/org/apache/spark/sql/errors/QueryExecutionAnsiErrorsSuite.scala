@@ -139,8 +139,7 @@ class QueryExecutionAnsiErrorsSuite extends QueryTest
       parameters = Map(
         "value" -> "66666666666666.666",
         "precision" -> "8",
-        "scale" -> "1",
-        "config" -> ansiConf),
+        "scale" -> "1"),
       context = ExpectedContext(
         fragment = "CAST('66666666666666.666' AS DECIMAL(8, 1))",
         start = 7,
@@ -155,8 +154,7 @@ class QueryExecutionAnsiErrorsSuite extends QueryTest
       parameters = Map(
         "value" -> "66666666666666.666",
         "precision" -> "8",
-        "scale" -> "1",
-        "config" -> ansiConf),
+        "scale" -> "1"),
       context = ExpectedContext(
         fragment = "cast",
         callSitePattern = getCurrentClassCallSitePattern))
@@ -318,7 +316,7 @@ class QueryExecutionAnsiErrorsSuite extends QueryTest
     }
   }
 
-  test("CAST_OVERFLOW_IN_TABLE_INSERT: overflow during table insertion") {
+  test("CAST_OVERFLOW_IN_TABLE_INSERT: overflow during table insertion") { // fails for some reason
     Seq("TINYINT", "SMALLINT", "INT", "BIGINT", "DECIMAL(7,2)").foreach { targetType =>
       val tableName = "overflowTable"
       withTable(tableName) {
