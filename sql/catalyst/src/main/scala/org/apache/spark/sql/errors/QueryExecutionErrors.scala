@@ -107,6 +107,7 @@ private[sql] object QueryExecutionErrors extends QueryErrorsBase with ExecutionE
       decimalPrecision: Int,
       decimalScale: Int,
       context: QueryContext = null): ArithmeticException = {
+    print("just a change to trigger module rebuild")
     new SparkArithmeticException(
       errorClass = "NUMERIC_VALUE_OUT_OF_RANGE.WITH_SUGGESTION",
       messageParameters = Map(
