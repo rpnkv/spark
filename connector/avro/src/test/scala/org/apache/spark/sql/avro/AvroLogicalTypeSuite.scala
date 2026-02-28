@@ -18,10 +18,12 @@ package org.apache.spark.sql.avro
 
 import java.io.File
 import java.sql.Timestamp
+
 import org.apache.avro.{LogicalTypes, Schema}
 import org.apache.avro.Conversions.DecimalConversion
 import org.apache.avro.file.DataFileWriter
 import org.apache.avro.generic.{GenericData, GenericDatumWriter, GenericRecord}
+
 import org.apache.spark.{SparkArithmeticException, SparkConf, SparkException}
 import org.apache.spark.sql.{QueryTest, Row}
 import org.apache.spark.sql.catalyst.util.DateTimeUtils
@@ -411,7 +413,8 @@ abstract class AvroLogicalTypeSuite extends QueryTest with SharedSparkSession {
 
   test("Logical type: Decimal with too large precision") {
     withTempDir { dir =>
-      val schema = new Schema.Parser().parse("""{
+      val schema = new Schema.Parser().parse(
+        """{
         "namespace": "logical",
         "type": "record",
         "name": "test",
@@ -435,6 +438,8 @@ abstract class AvroLogicalTypeSuite extends QueryTest with SharedSparkSession {
         spark.read.format("avro").load(s"$dir.avro").collect()
       }
       assert(ex.getCondition.startsWith("FAILED_READ_FILE"))
+      val exception = ex.getCause.asInstanceOf[SparkArithmeticException]
+      val k = 2
       checkError(
         exception = ex.getCause.asInstanceOf[SparkArithmeticException],
         condition = "NUMERIC_VALUE_OUT_OF_RANGE.WITH_SUGGESTION",
