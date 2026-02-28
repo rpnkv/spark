@@ -18,12 +18,10 @@ package org.apache.spark.sql.avro
 
 import java.io.File
 import java.sql.Timestamp
-
 import org.apache.avro.{LogicalTypes, Schema}
 import org.apache.avro.Conversions.DecimalConversion
 import org.apache.avro.file.DataFileWriter
 import org.apache.avro.generic.{GenericData, GenericDatumWriter, GenericRecord}
-
 import org.apache.spark.{SparkArithmeticException, SparkConf, SparkException}
 import org.apache.spark.sql.{QueryTest, Row}
 import org.apache.spark.sql.catalyst.util.DateTimeUtils
@@ -443,8 +441,7 @@ abstract class AvroLogicalTypeSuite extends QueryTest with SharedSparkSession {
         parameters = Map(
           "value" -> "0",
           "precision" -> "4",
-          "scale" -> "2",
-          "config" -> "\"spark.sql.ansi.enabled\"")
+          "scale" -> "2")
       )
     }
   }
