@@ -438,8 +438,6 @@ abstract class AvroLogicalTypeSuite extends QueryTest with SharedSparkSession {
         spark.read.format("avro").load(s"$dir.avro").collect()
       }
       assert(ex.getCondition.startsWith("FAILED_READ_FILE"))
-      val exception = ex.getCause.asInstanceOf[SparkArithmeticException]
-      val k = 2
       checkError(
         exception = ex.getCause.asInstanceOf[SparkArithmeticException],
         condition = "NUMERIC_VALUE_OUT_OF_RANGE.WITH_SUGGESTION",
